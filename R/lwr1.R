@@ -1,21 +1,20 @@
 lwr1 <-
 function(form,window=.25,bandwidth=0,kern="tcub",search.method="gcv",search.print=TRUE,alldata=FALSE,predx=0,graph.yhat=FALSE,
   graph.predx=FALSE,data=NULL) {
-  attach(data,warn.conflicts=FALSE)
 
   nw = length(window)
   nb = length(bandwidth)
   if ((nw>1)&(nb>1))   { cat("Both window and bandwidth vectors specified; will use window vector","\n") }
   if (nw>1) {
-    h = lwr1_minh(form,window=window,bandwidth=0,kern=kern,method=search.method,print=search.print,alldata=alldata)
+    h = lwr1_minh(form,window=window,bandwidth=0,kern=kern,method=search.method,print=search.print,alldata=alldata,data=data)
     window = h
   }
   if (nb>1&nw==1) {
-    h = lwr1_minh(form,window=0,bandwidth=bandwidth,kern=kern,method=search.method,print=search.print,alldata=alldata)
+    h = lwr1_minh(form,window=0,bandwidth=bandwidth,kern=kern,method=search.method,print=search.print,alldata=alldata,data)
     bandwidth = h
   }
   
-  mat <- model.frame(form)
+  mat <- model.frame(form,data=data)
   y <- mat[,1]
   x <- mat[,2]
   sdx = sd(x)

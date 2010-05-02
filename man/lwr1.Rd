@@ -104,7 +104,11 @@ Silverman, B.W.  \emph{Density Estimation for Statistics and Data Analysis.}  Lo
 \author{
 Daniel McMillen
 }
+\seealso{
+ \link{cubespline1}
 
+ \link{fourier1}
+}
 
 
 

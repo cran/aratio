@@ -1,7 +1,7 @@
-cubespline <- function(form,knots=1,mink=1,maxk=1,crit="gcv",data=NULL) { 
+cubespline1 <- function(form,knots=1,mink=1,maxk=1,crit="gcv",data=NULL) { 
 cat("Reminder:  first explanatory variable is used for spline","\n")
-  attach(data,warn.conflicts=FALSE)
-  mat <- model.frame(form)
+
+  mat <- model.frame(form,data=data)
   y <- mat[,1]
   z <- mat[,2]
   n = length(y)

@@ -9,10 +9,8 @@ Lines can be added to the diagrams for statutory assessment rates and user-input
 \usage{
 agraph(av, price, cftitle = "95\% CI", title = "Assessment Ratios", 
   width = 0.01, legloc = "none", freq = FALSE, normdens = FALSE, 
-  kdens = FALSE, cfint = c(FALSE, FALSE), statute = FALSE, file = "none",
-  data=NULL)
+  kdens = FALSE, cfint = c(FALSE, FALSE), statute = FALSE, file = "none")
 }
-%- maybe also 'usage' for other objects documented here.
 
 \arguments{
   \item{av}{Variable representing assessed value.}
@@ -20,23 +18,14 @@ agraph(av, price, cftitle = "95\% CI", title = "Assessment Ratios",
   \item{cftitle}{Title for cfint in legend if legloc is not equal to "none" and cfint is not equal to c(F,F).  
 Defaults to cfint="95\% CI" if cfint option is specified.
 }
-  \item{title}{
-Main title for histogram plot.  Default is title="Assessment Ratios"}
-  \item{width}{
-Bin width for histogram.  Default is width=.01.  Smaller values show more detail.
-}
-  \item{legloc}{
-Legend location.  Default is "none".  Other standard R options are available:  
+  \item{title}{Main title for histogram plot.  Default is title="Assessment Ratios"}
+  \item{width}{Bin width for histogram.  Default is width=.01.  Smaller values show more detail.}
+  \item{legloc}{Legend location.  Default is "none".  Other standard R options are available:  
 "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center."
 }
-  \item{freq}{Indicates whether y-axis should be frequency (freq=T) or percent (freq=F).  Default is freq=F.
-}
-  \item{normdens}{If normdens=T, normal density function is added to the plot.  
-Default is normdens=F.
-}
-  \item{kdens}{If kerndens=T, kernel density function is added to the plot.  
-Default is kerndens=F.
-}
+  \item{freq}{Indicates whether y-axis should be frequency (freq=T) or percent (freq=F).  Default is freq=F.}
+  \item{normdens}{If normdens=T, normal density function is added to the plot.  Default is normdens=F.}
+  \item{kdens}{If kerndens=T, kernel density function is added to the plot.  Default is kerndens=F.}
   \item{cfint}{Designed to add lines for a confidence interval to the plot. Values must be entered in a vector with two entries, e.g., cfint=c(.40, .60).  
 Can be used to add a line for a single value by entering the same value twice, e.g., cfint=c(.5, .5).  Useful in combination with rstats function.  
 Default is cfint=c(F,F), which means that no lines are added to the plot.
@@ -47,7 +36,6 @@ Designed to add a line representing the statutory assessment rate, e.g, statute=
   \item{file}{Results are written to a file rather than the screen if file is specified.  Default is file="none".  
 Example of a possible file location:  file="/dir1/dir2/graph.png"
 }
-  \item{data }{A data frame containing the data. Default:  use data in the current working directory.}
 }
 
 \value{
@@ -84,7 +72,7 @@ agraph(av, price, normdens=TRUE, kdens=TRUE, legloc= "topleft", cfint=c(lo,hi),
 # plot mean only; vary title for cfint
 amean = rstat[1,1]
 agraph(av, price, cfint=c(amean,amean), legloc="topright", 
-	cftitle= "Mean", kdens=TRUE, statute=.33)}
+	cftitle= "Mean", kdens=TRUE, statute=.33)
+}
 
 
-\keyword{spline}

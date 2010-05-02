@@ -1,7 +1,7 @@
-fourier <- function(form,q=1,minq=0,maxq=0,crit="gcv",data=NULL) {  
+fourier1 <- function(form,q=1,minq=0,maxq=0,crit="gcv",data=NULL) {  
 cat("Reminder:  first explanatory variable is used for fourier expansion","\n")
-  attach(data,warn.conflicts=FALSE)
-  mat <- model.frame(form)
+
+  mat <- model.frame(form,data=data)
   y <- mat[,1]
   z <- mat[,2]
   n = length(y)
@@ -56,6 +56,7 @@ cat("Reminder:  first explanatory variable is used for fourier expansion","\n")
     if (qstar==maxq) {cat("Warning:  best q = maximum allowed; may want to try higher value for maxq","\n") }
    }
  
+
   maxq = ifelse(searchq==TRUE,qstar,q)
   newform <- y~z+square
   if (qstar>0) {

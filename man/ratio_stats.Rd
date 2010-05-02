@@ -1,28 +1,17 @@
 \name{ratio_stats}
 \alias{ratio_stats}
-\title{
-Assessment ratio study statistics and confidence intervals.
-}
+\title{Assessment ratio study statistics and confidence intervals.}
 \description{
 Produces a table of standard assessment ratio study statistics with bootstrap standard errors and confidence intervals.
 }
-\usage{
-ratio_stats(av, price, nboot = 0, print = TRUE, data=NULL)
-}
-%- maybe also 'usage' for other objects documented here.
+\usage{ratio_stats(av, price, nboot = 0, type=6, print = TRUE)}
 \arguments{
-  \item{av}{Assessed value.
-}
-  \item{price}{
-Price. 
-}
-  \item{nboot}{
-Number of replications of bootstrap resampling procedure.  Default:  nboot = 0.  
-}
-  \item{print}{
-If print = T, prints the table of results.  Default print=T.
-}
-  \item{data }{A data frame containing the data. Default:  use data in the current working directory.}
+  \item{av}{Assessed value.}
+  \item{price}{Price.}
+  \item{nboot}{Number of replications of bootstrap resampling procedure.  Default:  nboot = 0.}
+  \item{type}{An integer between 1 and 9 selecting one of the nine quantile algorithms used by R's \emph{quantile} command. 
+The algorithms are listed in the R's documentation for \emph{quantile}.  Default:  \emph{type=6}.}
+  \item{print}{If print = T, prints the table of results.  Default print=T.}
 }
 \value{
 If nboot=0, produces a vector holding the sample mean, median, value weighted mean, 
@@ -94,8 +83,5 @@ This confidence interval is most appropriate if the statistic follows a normal d
 If the statistic does not follow a symmetric distribution, the "percentile method" will produce a more accurate confidence interval.  
 Let B denote the vector containing the nboot re-calculations of the test statistics; the percentile method 95 percent confidence interval 
 is simply lo2 = quantile(b, .025) and hi2 = quantile(b, .975).
-
-
-
 
 }

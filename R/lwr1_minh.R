@@ -1,6 +1,5 @@
 lwr1_minh <-
 function(form,window=0,bandwidth=0,kern="tcub",method="gcv",print=TRUE,alldata=FALSE,data=NULL) {
-  attach(data,warn.conflicts=FALSE)
 
   nw = length(window)
   nb = length(bandwidth)
@@ -13,7 +12,7 @@ function(form,window=0,bandwidth=0,kern="tcub",method="gcv",print=TRUE,alldata=F
 
   if (nw>1) {
     for (iw in window) {
-      fit1 <- lwr1(form,window=iw,bandwidth=0,kern=kern,alldata=alldata,predx=0,graph.yhat=FALSE,graph.predx=FALSE)
+      fit1 <- lwr1(form,window=iw,bandwidth=0,kern=kern,alldata=alldata,predx=0,graph.yhat=FALSE,graph.predx=FALSE,data=data)
       hval = ifelse(icross==TRUE,fit1$cv,fit1$gcv)
       if (print==TRUE) {print(c(iw,hval))}
       if (hval<minval) {
@@ -26,7 +25,7 @@ function(form,window=0,bandwidth=0,kern="tcub",method="gcv",print=TRUE,alldata=F
 
   if (nb>1) {
     for (ib in bandwidth) {
-      fit1 <- lwr1(form,window=0,bandwidth=ib,kern=kern,alldata=alldata,predx=0,graph.yhat=FALSE,graph.predx=FALSE)
+      fit1 <- lwr1(form,window=0,bandwidth=ib,kern=kern,alldata=alldata,predx=0,graph.yhat=FALSE,graph.predx=FALSE,data=data)
       hval = ifelse(icross==TRUE,fit1$cv,fit1$gcv)
       if (print==TRUE) {print(c(ib,hval))}
       if (hval<minval) {

@@ -1,22 +1,23 @@
-\name{fourier}
-\alias{fourier}
+\name{fourier1}
+\alias{fourier1}
 \title{
 Fourier expansion smoothing
 }
 \description{
-Estimates a model of the form y=f(x) using a fourier expansion for x. x must be a single variable. 
-The variable x is first transformed to form \eqn{z = 2\pi\frac{(x-min(x))}{max(x)-min(x))}}{z = 2 pi (x-min(x))/(max(x)-min(x))}. 
-The fourier model is \eqn{y = \alpha_1 z + \alpha_2 z^2 + \sum_{q=1}^Q(\lambda_q sin(qz) + \delta_q cos(qz))}. 
+Estimates a model of the form y=f(z)+XB+u using a fourier expansion for z.  
+The variable z is first transformed to \eqn{z = 2\pi\frac{(z-min(z))}{max(z)-min(z))}}{z = 2 pi (z-min(z))/(max(z)-min(z))}. 
+The fourier model is \eqn{y = \alpha_1 z + \alpha_2 z^2 + \sum(\lambda_q sin(qz) + \delta_q cos(qz)) + X \beta +u}{y = \alpha_1 z + \alpha_2 z^2 + \sum_{q=1}^Q(\lambda_q sin(qz) + \delta_q cos(qz)) + X \beta +u}. 
 Estimation can be carried out for a fixed value of Q or for a range of Q. In the latter case, 
-the function indicates the value of Q that produces the lowest value of one of hte following criteria: the AIC, the Schwarz information criterion, or the gcv.
+the function indicates the value of Q that produces the lowest value of one of the following criteria: the AIC, the Schwarz information criterion, or the gcv.
 }
 \usage{
-fourier(form,q=1,minq=0,maxq=0,crit="gcv",data=NULL)
+fourier1(form,q=1,minq=0,maxq=0,crit="gcv",data=NULL)
 }
 
 \arguments{
-  \item{form }{Model formula}
-  \item{q }{If q is specified and minq=maxq, fits a fourier expansion with Q set to q.  Default is q=1, which implies a model with z, z2, sin(z), and cos(z) as explanatory variables.}
+  \item{form }{Model formula.  The expansion is applied to the first explanatory variable.}
+  \item{q }{If q is specified and minq=maxq, fits a fourier expansion with Q set to q.  
+Default is q=1, which implies a model with z, z^2, sin(z), cos(z) and X as explanatory variables.}
   \item{minq }{The lower bound to search for the value of Q that minimizes crit.  minq can take any value greater than zero.  Default:  not used.}
   \item{maxq }{The upper bound to search for the value of Q that minimizes crit.  maxq must be great than or equal to minq. Default:  not used.}
   \item{crit }{The selection criterion.  Must be in quotes.  The default is the generalized cross-validation criterion, or "gcv".  Options include the Akaike information criterion, "aic", and the Schwarz criterion, "sc".  Let nreg be the number of explanatory variables in the regression and sig2 the estimated variance.  The formulas for the available crit options are   \cr
@@ -35,7 +36,8 @@ fourier(form,q=1,minq=0,maxq=0,crit="gcv",data=NULL)
   \item{sc }{The value for sc}
   \item{gcv }{The value for gcv}
   \item{coef }{The estimated coefficient vector, B}
-  \item{fourierhat }{The predicted values for z alone, normalized to have the same mean as the dependent variable.  If no X variables are included in the regression, fourierhat = yhat.}
+  \item{fourierhat }{The predicted values for z alone, normalized to have the same mean as the dependent variable.  
+If no X variables are included in the regression, fourierhat = yhat.}
   \item{q }{The value of Q used in the final estimated model.}
 
 }
@@ -51,10 +53,15 @@ McMillen, Daniel P., "Neighborhood Price Indexes in Chicago:  A Fourier Repeat S
 McMillen, Daniel P., "Issues in Spatial Data Analysis," \emph{Journal of Regional Science} 50 (2010), 119-141.  
 
 }
+\seealso{
+ \link{cubespline1}
 
+ \link{lwr1}
+}
 \author{
 Daniel McMillen
 }
+
 
 
 \examples{
@@ -70,14 +77,11 @@ par(ask=TRUE)
 plot(x,y)
 lines(x,ybase,col="red")
 
-fit <- fourier(y~x,minq=1,maxq=10)
+fit <- fourier1(y~x,minq=1,maxq=10)
 plot(x,ybase,type="l",xlab="x",ylab="y")
 lines(x,fit$yhat,col="red")
 legend("topright",c("Base","Fourier"),col=c("black","red"),lwd=1)
 
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

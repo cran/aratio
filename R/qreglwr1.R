@@ -1,9 +1,7 @@
-qreglwr <-
-function(form,window=.50,bandwidth=0,kern="tcub",taumat=c(.1,.25,.5,.75,.9),
+qreglwr1 <- function(form,window=.50,bandwidth=0,kern="tcub",taumat=c(.1,.25,.5,.75,.9),
     alldata=FALSE,predx=0,graph.yhat=FALSE,graph.predx=FALSE,data=NULL) {
-  attach(data,warn.conflicts=FALSE)
 
-  mat <- model.frame(form)
+  mat <- model.frame(form,data=data)
   y <- mat[,1]
   x <- mat[,2]
   sdx = sd(x)

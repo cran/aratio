@@ -6,16 +6,15 @@
 A nonparametric trimming procedure for identifying outlier observations in a variable.
 }
 \usage{
-nptrim_obs(x, k = 3, print = TRUE, data=NULL)
+nptrim_obs(x, k = 3, type=6, print = TRUE)
 
 }
 \arguments{
   \item{x}{Variable to be trimmed of outliers.}
   \item{k}{Factor determining range for trimming. Default: k=3}
-  \item{print}{
-If print=T, presents summary information on x and trimming results.
-}
-  \item{data }{A data frame containing the data. Default:  use data in the current working directory.}
+  \item{type}{An integer between 1 and 9 selecting one of the nine quantile algorithms used by R's \emph{quantile} command. 
+The algorithms are listed in the R's documentation for \emph{quantile}.  Default:  \emph{type=6}.}
+  \item{print}{If print=T, presents summary information on x and trimming results.}
 }
 \value{
 An n-vector indicating which observations are identified as outliers.

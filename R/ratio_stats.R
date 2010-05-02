@@ -1,6 +1,4 @@
-ratio_stats <-
-function(av,price,nboot=0,print=TRUE,data=NULL) {
-  attach(data,warn.conflicts=FALSE)
+ratio_stats <- function(av,price,nboot=0,type=6,print=TRUE) {
 
   sampobs <- !is.na(av)&!is.na(price)
   av <- av[sampobs]
@@ -38,8 +36,8 @@ function(av,price,nboot=0,print=TRUE,data=NULL) {
     bvect[,3] <- bvect[,1] - 1.96*bvect[,2]
     bvect[,4] <- bvect[,1] + 1.96*bvect[,2]
     for (i in seq(1:6)) {
-      bvect[i,5] = quantile(rboot$t[,i],.025)
-      bvect[i,6] = quantile(rboot$t[,i],.975)
+      bvect[i,5] = quantile(rboot$t[,i],.025,type=type)
+      bvect[i,6] = quantile(rboot$t[,i],.975,type=type)
     }
     rownames(bvect) <- c("mean","median","wgt mean","cod","wgt cod","prd")
     colnames(bvect) <- c("observed","Std Err","Normal-lo","Normal-hi","Percentile-lo","Percentile-hi")

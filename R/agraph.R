@@ -1,7 +1,6 @@
 agraph <-
 function(av,price,cftitle="95% CI",title="Assessment Ratios",width=.01,
-    legloc="none",freq=FALSE,normdens=FALSE,kdens=FALSE,cfint=c(FALSE,FALSE),statute=FALSE,file="none",data=NULL) {
-  attach(data,warn.conflicts=FALSE)  
+    legloc="none",freq=FALSE,normdens=FALSE,kdens=FALSE,cfint=c(FALSE,FALSE),statute=FALSE,file="none") {
   if (file!="none") png(file)
 
   ratio <- av/price

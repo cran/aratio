@@ -1,10 +1,10 @@
-\name{qreglwr}
-\alias{qreglwr}
+\name{qreglwr1}
+\alias{qreglwr1}
 \title{Nonparametric quantiles based on weighted quantile regressions }
 \description{
 Estimates nonparametric quantile functions by applying a weight function to the standard quantreg estimator. }
 \usage{
-qreglwr(form, window = .50, bandwidth = 0, kern = "tcub", 
+qreglwr1(form, window = .50, bandwidth = 0, kern = "tcub", 
   taumat = c(0.1, 0.25, 0.5, 0.75, 0.9), alldata = FALSE, 
   predx = 0, graph.yhat = FALSE, graph.predx = FALSE, data=NULL)
 
@@ -50,6 +50,9 @@ Chapter 7 and Appendix A.9.
 \author{
 Daniel McMillen
 }
+\seealso{
+ \link{condens1}
+}
 
 \examples{
 set.seed(23849103)
@@ -59,7 +62,7 @@ x <- sort(x)
 ybase <- x - .1*(x^2) + sin(x) - cos(x) -.5*sin(2*x) + .5*cos(2*x)
 sig = sd(ybase)/2
 y <- ybase + rnorm(n,0,sig)
-fit <- qreglwr(y~x, graph.yhat=TRUE)
+fit <- qreglwr1(y~x, graph.yhat=TRUE)
 
 # Plot results after estimation
 data(dupage99)
@@ -73,7 +76,7 @@ dupage99 <- dupage99[o,]
 attach(dupage99)
 price <- price/1000
 
-fit <- qreglwr(ratio~price,window=.3)
+fit <- qreglwr1(ratio~price,window=.3)
 ymin = min(fit$yhat)
 ymax = max(fit$yhat)
 plot(price, fit$yhat[,1],type="l",xlab="Sales Price (1000s)",ylab="Assessment Ratio",

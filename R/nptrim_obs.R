@@ -1,14 +1,12 @@
-nptrim_obs <-
-function(x,k=3,print=TRUE,data=NULL) {
-  attach(data,warn.conflicts=FALSE)
+nptrim_obs <- function(x,k=3,type=6,print=TRUE) {
 
   missobs <- is.na(x)
 
   n = length(x)
   nmiss = sum(missobs)
   qmin = min(x,na.rm=TRUE)
-  q25 = quantile(x,.25,na.rm=TRUE)
-  q75 = quantile(x,.75,na.rm=TRUE)
+  q25 = quantile(x,.25,type=type,na.rm=TRUE)
+  q75 = quantile(x,.75,type=type,na.rm=TRUE)
   qmax = max(x,na.rm=TRUE)
   lo = q25 - k*(q75-q25)
   hi = q75 + k*(q75-q25)
@@ -18,7 +16,7 @@ function(x,k=3,print=TRUE,data=NULL) {
 
   trim_vect <- c(n,nmiss,n-nmiss,ntrim,sum(dropobs),n-nmiss-ntrim,qmin,q25,q75,qmax,lo,hi)
   names(trim_vect) <- c("Total number of observations","Number of missing observations","Number of non-missing observations",
-     "Number of non-missing observatons trimmed","Total number of observations dropped","Number of non-missing observations after trimming",
+     "Number of non-missing observations trimmed","Total number of observations dropped","Number of non-missing observations after trimming",
      "minimum","25th percentile","75th percentile","maximum","lower bound for trimming","upper bound for trimming")
   x.out <- data.frame(trim_vect)
   colnames(x.out) <- " "
